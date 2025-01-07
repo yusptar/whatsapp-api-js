@@ -11,7 +11,7 @@ app.use(express.json());
 // Membuat klien WhatsApp dengan LocalAuth untuk menyimpan sesi autentikasi secara lokal
 const client = new Client({
     authStrategy: new LocalAuth({
-        clientId: 'SICAPIT' // Identifier sesi autentikasi
+        clientId: 'Client'
     }),
     webVersionCache: {
         type: "remote",
@@ -27,12 +27,11 @@ client.on('qr', qr => {
 
 // Event saat klien siap digunakan
 client.on('ready', async () => {
-    console.log('Server WhatsApp SICAPIT is ready!');
+    console.log('Server WhatsApp is ready!');
 
     try {
         // Mendapatkan semua chat
         const chats = await client.getChats();
-        console.log('Chats:', chats);
         // Memfilter hanya grup
         const groups = chats.filter(chat => chat.isGroup);
 
