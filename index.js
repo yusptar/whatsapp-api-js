@@ -11,7 +11,7 @@ app.use(express.json());
 // Membuat klien WhatsApp dengan LocalAuth untuk menyimpan sesi autentikasi secara lokal
 const client = new Client({
     authStrategy: new LocalAuth({
-        clientId: 'Client'
+        clientId: 'YourNameClient'
     }),
     webVersionCache: {
         type: "remote",
@@ -28,15 +28,12 @@ client.on('qr', qr => {
 // Event saat klien siap digunakan
 client.on('ready', async () => {
     console.log('Server WhatsApp is ready!');
-
     try {
-        // Mendapatkan semua chat
         const chats = await client.getChats();
-        // Memfilter hanya grup
         const groups = chats.filter(chat => chat.isGroup);
 
         if (groups.length === 0) {
-            console.log('Tidak ada grup yang ditemukan.');
+            console.log('Group not found.');
         } else {
             console.log('Daftar Grup WhatsApp:');
             console.log('==============================');
